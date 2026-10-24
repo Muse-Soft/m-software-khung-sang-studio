@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khung Sáng Studio — Portfolio nhiếp ảnh kiến trúc</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  body{background:#FAF7F2;color:#1C1A17;font-family:Inter,sans-serif;font-size:17px;line-height:1.7}
+  h1,h2,h3{font-family:Fraunces,serif;font-weight:600}
+  .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
+  section{padding:96px 0}
+  section + section{margin-top:0}
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(250,247,242,.92);border-bottom:1px solid #E9DFD3}
+  header .wrap{display:flex;justify-content:space-between;align-items:center;height:64px}
+  .logo{font-family:Fraunces,serif;font-size:24px}
+  nav a{color:#1C1A17;text-decoration:none;margin-left:24px;font-size:16px}
+  nav a:hover{color:#B4552D}
+  .hero{position:relative;height:100vh;min-height:560px;padding:0;overflow:hidden}
+  .hero img{width:100%;height:100%;object-fit:cover;aspect-ratio:16/9;display:block}
+  .hero-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.55),rgba(0,0,0,.05) 60%)}
+  .hero-text{position:absolute;left:0;right:0;bottom:0;padding:0 24px 64px}
+  .hero-text .inner{max-width:1200px;margin:0 auto}
+  .hero h1{color:#fff;font-size:64px;line-height:1.15;max-width:720px}
+  .hero p{color:#fff;margin:16px 0 24px;max-width:560px}
+  .btn{display:inline-block;background:#B4552D;color:#fff;font-family:Inter,sans-serif;font-weight:600;font-size:16px;line-height:1.5;padding:12px 28px;border:none;border-radius:4px;cursor:pointer;text-decoration:none}
+  .btn:hover{opacity:.9}
+  h2{font-size:40px;line-height:1.2;margin-bottom:8px}
+  h2::after{content:"";display:block;width:56px;height:3px;background:#B4552D;margin-top:16px}
+  .sec-lead{color:#6B6259;max-width:640px;margin-bottom:40px}
+  .filters{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:32px}
+  .filters button{font-family:Inter,sans-serif;font-size:16px;font-weight:600;padding:10px 22px;border:1px solid #E9DFD3;background:#fff;color:#1C1A17;border-radius:999px;cursor:pointer}
+  .filters button.active{background:#B4552D;border-color:#B4552D;color:#fff}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:32px 24px}
+  .card{cursor:pointer}
+  .card img{width:100%;aspect-ratio:4/3;object-fit:cover;display:block;border-radius:4px}
+  .card figcaption{font-size:14px;line-height:1.5;color:#6B6259;margin-top:10px}
+  .note{font-size:14px;color:#6B6259}
+  .intro{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center}
+  .intro img{width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:4px}
+  .steps{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+  .step-num{font-family:Fraunces,serif;font-size:40px;color:#B4552D}
+  .step h3{font-size:24px;margin:8px 0}
+  .pricing{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .price-card{background:#fff;border:1px solid #E9DFD3;border-radius:8px;padding:32px}
+  .price-card.featured{border:2px solid #B4552D;position:relative}
+  .badge{display:inline-block;background:#B4552D;color:#fff;font-size:13px;font-weight:600;padding:4px 12px;border-radius:999px;margin-bottom:12px}
+  .price-card h3{font-size:24px}
+  .price{font-size:28px;font-weight:600;margin:12px 0}
+  .price-card ul{list-style:none;color:#6B6259;font-size:15px}
+  .price-card li{padding:6px 0;border-top:1px solid #E9DFD3}
+  .quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .quote{background:#fff;border:1px solid #E9DFD3;border-radius:8px;padding:24px}
+  form{background:#fff;border:1px solid #E9DFD3;border-radius:8px;padding:32px;max-width:720px}
+  label{display:block;font-size:14px;margin:16px 0 6px}
+  input,select,textarea{width:100%;font-family:Inter,sans-serif;font-size:16px;padding:12px;border:1px solid #E9DFD3;border-radius:4px;background:#FAF7F2}
+  form .btn{margin-top:24px}
+  footer{border-top:1px solid #E9DFD3;padding:40px 0;color:#6B6259;font-size:14px}
+  .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);display:none;align-items:center;justify-content:center;z-index:100;flex-direction:column;padding:24px}
+  .lightbox.open{display:flex}
+  .lightbox img{max-width:90vw;max-height:75vh;object-fit:contain;border-radius:4px}
+  .lightbox figcaption{color:#fff;margin-top:16px;font-size:16px}
+  .lb-btn{position:absolute;background:rgba(255,255,255,.15);color:#fff;border:none;font-size:28px;width:48px;height:48px;border-radius:50%;cursor:pointer}
+  .lb-close{top:24px;right:24px}
+  .lb-prev{left:24px;top:50%}
+  .lb-next{right:24px;top:50%}
+  @media (max-width:768px){
+    body{font-size:16px}
+    section{padding:48px 0}
+    nav a{margin-left:12px;font-size:14px}
+    .hero h1{font-size:40px}
+    h2{font-size:28px}
+    .grid,.intro,.steps,.pricing,.quotes{grid-template-columns:1fr}
+    .hero-text{padding-bottom:48px}
+  }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="logo">Khung Sáng Studio</div>
+    <nav>
+      <a href="#bo-suu-tap">Bộ sưu tập</a>
+      <a href="#gioi-thieu">Giới thiệu</a>
+      <a href="#lien-he">Liên hệ</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" id="hero">
+  <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1920&h=1080&auto=format&fit=crop" alt="Ảnh mẫu: ngôi nhà hiện đại dưới ánh nắng ban ngày">
+  <div class="hero-overlay"></div>
+  <div class="hero-text"><div class="inner">
+    <h1>Kiến trúc kể chuyện bằng ánh sáng</h1>
+    <p>Portfolio nhiếp ảnh kiến trúc — nơi mỗi công trình được ghi lại đúng với ánh sáng và không gian vốn có của nó.</p>
+    <a class="btn" href="#bo-suu-tap">Xem bộ sưu tập</a>
+  </div></div>
+</section>
+
+<section id="bo-suu-tap">
+  <div class="wrap">
+    <h2>Bộ sưu tập</h2>
+    <p class="sec-lead">Chọn một nhóm để xem các công trình. Nhấn vào ảnh để xem ảnh lớn.</p>
+    <div class="filters" role="tablist">
+      <button class="active" data-filter="nha-o">Nhà ở</button>
+      <button data-filter="cong-trinh-cong-cong">Công trình công cộng</button>
+      <button data-filter="noi-that">Nội thất</button>
+    </div>
+    <div class="grid" id="gallery"></div>
+    <p class="note" style="margin-top:32px">Lưu ý: tất cả ảnh trên trang này là ảnh mẫu, dùng tạm cho bản demo; khi có ảnh thật của studio sẽ thay đúng vị trí và đúng tỉ lệ khung.</p>
+  </div>
+</section>
+
+<section id="gioi-thieu">
+  <div class="wrap">
+    <h2>Giới thiệu</h2>
+    <div class="intro" style="margin-top:40px">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=900&h=1200&auto=format&fit=crop" alt="Ảnh mẫu: chân dung nhiếp ảnh gia">
+      <div>
+        <p>Khung Sáng Studio chụp ảnh kiến trúc theo phong cách tối giản: ánh sáng tự nhiên, bố cục gọn và màu sắc trung thực.</p>
+        <p>Studio làm việc với kiến trúc sư và chủ đầu tư để ghi lại công trình ở thời điểm đẹp nhất trong ngày.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="quy-trinh">
+  <div class="wrap">
+    <h2>Quy trình 4 bước</h2>
+    <div class="steps" style="margin-top:40px">
+      <div class="step"><div class="step-num">01</div><h3>Trao đổi</h3><p>Nghe yêu cầu và chọn thời điểm chụp phù hợp với ánh sáng của công trình.</p></div>
+      <div class="step"><div class="step-num">02</div><h3>Khảo sát</h3><p>Xem mặt bằng và góc chụp trước buổi chụp để tiết kiệm thời gian tại hiện trường.</p></div>
+      <div class="step"><div class="step-num">03</div><h3>Chụp hình</h3><p>Chụp bằng ánh sáng tự nhiên, ưu tiên góc rộng thể hiện rõ không gian.</p></div>
+      <div class="step"><div class="step-num">04</div><h3>Bàn giao</h3><p>Chọn lọc và chỉnh màu đồng tông rồi bàn giao file chất lượng cao.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="goi-gia">
+  <div class="wrap">
+    <h2>Gói dịch vụ</h2>
+    <div class="pricing" style="margin-top:40px">
+      <div class="price-card"><h3>Gói Cơ bản</h3><div class="price">Liên hệ báo giá</div><ul><li>Chụp 1 buổi, tối đa 4 giờ</li><li>20 ảnh đã chỉnh màu</li><li>Giao file online</li></ul></div>
+      <div class="price-card featured"><span class="badge">Phổ biến nhất</span><h3>Gói Tiêu chuẩn</h3><div class="price">Liên hệ báo giá</div><ul><li>Chụp 1 ngày, sáng và chiều</li><li>50 ảnh đã chỉnh màu</li><li>Ảnh bìa cho hồ sơ dự án</li><li>Giao file online + USB</li></ul></div>
+      <div class="price-card"><h3>Gói Toàn diện</h3><div class="price">Liên hệ báo giá</div><ul><li>Chụp nhiều ngày, nhiều thời điểm</li><li>100 ảnh đã chỉnh màu</li><li>Ảnh flycam ngoại thất</li><li>Bộ ảnh cho truyền thông</li></ul></div>
+    </div>
+    <p class="note" style="margin-top:24px">Giá cụ thể trao đổi theo từng công trình; trang này không công bố giá cố định.</p>
+  </div>
+</section>
+
+<section id="nhan-xet">
+  <div class="wrap">
+    <h2>Nhận xét mẫu</h2>
+    <div class="quotes" style="margin-top:40px">
+      <div class="quote"><p>“Ảnh sáng, rõ không gian, đúng màu vật liệu như ngoài đời thật.”</p><p class="note">— Nhận xét mẫu</p></div>
+      <div class="quote"><p>“Buổi chụp gọn gàng, không làm gián đoạn sinh hoạt trong nhà.”</p><p class="note">— Nhận xét mẫu</p></div>
+      <div class="quote"><p>“Bộ ảnh dùng được ngay cho hồ sơ dự thi và đăng tạp chí.”</p><p class="note">— Nhận xét mẫu</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="lien-he">
+  <div class="wrap">
+    <h2>Liên hệ</h2>
+    <p class="sec-lead">Gửi yêu cầu chụp; studio sẽ phản hồi sau khi nhận được thông tin.</p>
+    <form onsubmit="event.preventDefault();alert('Đây là form demo, chưa gửi đi thật.');">
+      <label for="hoten">Họ tên *</label>
+      <input id="hoten" required>
+      <label for="email">Email *</label>
+      <input id="email" type="email" required>
+      <label for="loai">Loại công trình</label>
+      <select id="loai">
+        <option>Nhà ở</option>
+        <option>Công trình công cộng</option>
+        <option>Nội thất</option>
+      </select>
+      <label for="noidung">Nội dung (tùy chọn)</label>
+      <textarea id="noidung" rows="4"></textarea>
+      <button class="btn" type="submit">Gửi yêu cầu</button>
+      <p class="note" style="margin-top:16px">Form này chỉ là giao diện demo, chưa gửi đi thật.</p>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">Khung Sáng Studio — Portfolio nhiếp ảnh kiến trúc. Tất cả ảnh trên trang là ảnh mẫu cho bản demo.</div>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-label="Xem ảnh lớn">
+  <button class="lb-btn lb-close" id="lbClose" aria-label="Đóng">&times;</button>
+  <button class="lb-btn lb-prev" id="lbPrev" aria-label="Ảnh trước">&#8249;</button>
+  <button class="lb-btn lb-next" id="lbNext" aria-label="Ảnh sau">&#8250;</button>
+  <figure>
+    <img id="lbImg" src="" alt="">
+    <figcaption id="lbCap"></figcaption>
+  </figure>
+</div>
+
+<script>
+const PHOTOS = {
+  "nha-o": [
+    {src:"https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&h=900&auto=format&fit=crop", cap:"Nhà vườn ven đô — 2025"},
+    {src:"https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&h=900&auto=format&fit=crop", cap:"Nhà phố ánh sáng mở — 2024"},
+    {src:"https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?q=80&w=1200&h=900&auto=format&fit=crop", cap:"Biệt thự sân trong — 2025"}
+  ],
+  "cong-trinh-cong-cong": [
+    {src:"https://images.unsplash.com/photo-1487958449943-2429e8be8625?q=80&w=1200&h=900&auto=format&fit=crop", cap:"Trung tâm văn hóa — 2024"},
+    {src:"https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=1200&h=900&auto=format&fit=crop", cap:"Văn phòng sáng mở — 2025"},
+    {src:"https://images.unsplash.com/photo-1503387762-592deb58ef4e?q=80&w=1200&h=900&auto=format&fit=crop", cap:"Thư viện thành phố — 2023"}
+  ],
+  "noi-that": [
+    {src:"https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200&h=900&auto=format&fit=crop", cap:"Phòng khách gỗ sáng — 2025"},
+    {src:"https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?q=80&w=1200&h=900&auto=format&fit=crop", cap:"Căn hộ tông ấm — 2024"},
+    {src:"https://images.unsplash.com/photo-1615873968403-89e068629265?q=80&w=1200&h=900&auto=format&fit=crop", cap:"Không gian làm việc tại nhà — 2025"}
+  ]
+};
+const gallery = document.getElementById("gallery");
+let currentGroup = "nha-o", currentIndex = 0;
+function render(group){
+  currentGroup = group;
+  gallery.innerHTML = "";
+  PHOTOS[group].forEach((p, i) => {
+    const fig = document.createElement("figure");
+    fig.className = "card";
+    fig.innerHTML = '<img src="' + p.src + '" alt="' + p.cap + '" loading="lazy"><figcaption>' + p.cap + '</figcaption>';
+    fig.onclick = () => openLb(i);
+    gallery.appendChild(fig);
+  });
+}
+document.querySelectorAll(".filters button").forEach(b => {
+  b.onclick = () => {
+    document.querySelectorAll(".filters button").forEach(x => x.classList.remove("active"));
+    b.classList.add("active");
+    render(b.dataset.filter);
+  };
+});
+const lb = document.getElementById("lightbox"), lbImg = document.getElementById("lbImg"), lbCap = document.getElementById("lbCap");
+function openLb(i){
+  currentIndex = i;
+  const p = PHOTOS[currentGroup][i];
+  lbImg.src = p.src; lbImg.alt = p.cap; lbCap.textContent = p.cap;
+  lb.classList.add("open");
+}
+function step(d){
+  currentIndex = (currentIndex + d + PHOTOS[currentGroup].length) % PHOTOS[currentGroup].length;
+  openLb(currentIndex);
+}
+document.getElementById("lbClose").onclick = () => lb.classList.remove("open");
+document.getElementById("lbPrev").onclick = () => step(-1);
+document.getElementById("lbNext").onclick = () => step(1);
+lb.onclick = (e) => { if (e.target === lb) lb.classList.remove("open"); };
+document.addEventListener("keydown", (e) => {
+  if (!lb.classList.contains("open")) return;
+  if (e.key === "Escape") lb.classList.remove("open");
+  if (e.key === "ArrowLeft") step(-1);
+  if (e.key === "ArrowRight") step(1);
+});
+render("nha-o");
+</script>
+</body>
+</html>
